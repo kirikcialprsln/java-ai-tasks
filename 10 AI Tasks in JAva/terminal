@@ -1,0 +1,58 @@
+mkdir ai-tasks
+cd ai-tasks
+mkdir java-tasks
+
+# Create proper Maven project structure
+cd java-tasks
+mkdir -p src/main/java/com/aitasks/{core,models,utils}
+mkdir -p src/main/resources/{models,images,data,config}
+mkdir -p src/test/java/com/aitasks
+mkdir -p docs/{api,examples,images}
+
+# Create necessary resource directories
+mkdir -p src/main/resources/models/pretrained
+mkdir -p src/main/resources/images/accessories
+mkdir -p src/main/resources/data/training
+
+# Download required models
+curl -o src/main/resources/models/haarcascade_frontalface_default.xml \
+     https://raw.githubusercontent.com/opencv/opencv/master/data/haarcascades/haarcascade_frontalface_default.xml
+curl -o src/main/resources/models/en-sentiment.bin \
+     https://opennlp.sourceforge.net/models-1.5/en-sentiment.bin
+
+# Create placeholder images
+touch src/main/resources/images/accessories/sunglasses.png
+touch src/main/resources/images/accessories/mustache.png
+touch src/main/resources/images/content.jpg
+touch src/main/resources/images/style.jpg
+
+# Create configuration file
+touch src/main/resources/config/application.properties
+
+# Create documentation files
+touch docs/README.md
+touch docs/SETUP.md
+touch docs/API.md
+touch docs/EXAMPLES.md
+
+# Create Javadoc directory
+mkdir -p docs/javadoc
+
+# Move Java files to the package
+mv src/main/java/*.java src/main/java/com/aitasks/
+
+# Build and run
+mvn clean package
+java -jar target/java-tasks-1.0-SNAPSHOT-jar-with-dependencies.jar
+
+# Create directories for face detection task
+mkdir -p src/main/java/com/aitasks/models/face
+mkdir -p src/main/resources/images/accessories
+
+# Download required resources
+curl -o src/main/resources/models/haarcascade_frontalface_default.xml \
+     https://raw.githubusercontent.com/opencv/opencv/master/data/haarcascades/haarcascade_frontalface_default.xml
+
+# Create placeholder accessory images
+touch src/main/resources/images/accessories/sunglasses.png
+touch src/main/resources/images/accessories/mustache.png 
